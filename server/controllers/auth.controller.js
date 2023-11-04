@@ -32,7 +32,7 @@ const authController = {
         }
     },
     async isauth(req,res,next){
-        res.json({ok:'done'})
+        res.json(req.user);
     }
 }
 
