@@ -9,6 +9,7 @@ const authController = {
             const token = await authService.genAuthToken(user);
 
             /// SEND VERIFICATION EMAIL
+            ////////
 
             res.cookie('x-access-token',token)
             .status(httpStatus.CREATED).send({
