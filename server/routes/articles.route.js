@@ -20,6 +20,9 @@ router.route('/all')
 .post(articlesController.getMoreArticles)
 
 
+router.post('/admin/paginate', auth('readAny','articles'),articlesController.adminPaginate)
+
+
 /// Categories
 router.route('/categories')
 .post(auth('createAny','categories'), articlesController.createCategory)

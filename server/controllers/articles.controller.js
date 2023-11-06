@@ -63,6 +63,14 @@ const articlesController = {
             next(error)
         }
     },
+    async adminPaginate(req,res,next){
+        try{
+            const articles = await articlesService.paginateAdminArticles(req);
+            res.json(articles);
+        } catch(error){
+            next(error)
+        }
+    },
     async createCategory(req,res,next){
         try{
             const category = await articlesService.addCategory(req.body);
