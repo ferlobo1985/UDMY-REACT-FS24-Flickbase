@@ -46,8 +46,9 @@ const articleSchema = mongoose.Schema({
         index:true
     },
     category:{
-        type:String,
-        required:true,
+        type:Schema.Types.ObjectId,
+        ref: 'Category',
+        required:true
     },
     date:{
         type:Date,

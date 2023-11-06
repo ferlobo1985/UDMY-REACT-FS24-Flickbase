@@ -11,6 +11,15 @@ const articlesController = {
             next(error)
         }
     },
+    async getArticleById(req,res,next){
+        try{
+            const _id = req.params.id;
+            const article = await articlesService.getArticleById(_id,req.user);
+            res.json(article);
+        } catch(error){
+            next(error)
+        }
+    },
     async createCategory(req,res,next){
         try{
             const category = await articlesService.addCategory(req.body);
