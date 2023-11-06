@@ -121,6 +121,19 @@ const paginateAdminArticles = async(req)=>{
             )
         }
 
+        /// categories
+        aggQueryArray.push(
+            { $lookup:
+                {
+                   from:'categories',
+                   localField:'category',
+                   foreignField:'_id',
+                   as: 'category',
+                }
+            },
+            { $unwind:"$category"}
+        )
+
 
         let aggQuery = Article.aggregate(aggQueryArray)
         const limit = req.body.limit ? req.body.limit : 5;
