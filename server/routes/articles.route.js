@@ -4,6 +4,7 @@ const articlesController = require('../controllers/articles.controller');
 
 const auth = require('../middleware/auth');
 
+router.post('/',auth('createAny','articles'), articlesController.createArticle)
 
 
 
