@@ -12,7 +12,8 @@ router.route('/article/:id')
 .patch(auth('updateAny','articles'), articlesController.updateArticleById)
 .delete(auth('deleteAny','articles'), articlesController.deleteArticleById)
 
-
+router.route('/users/article/:id')
+.get(articlesController.getUsersArticleById)
 
 /// Categories
 router.route('/categories')

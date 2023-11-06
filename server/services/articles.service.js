@@ -54,6 +54,22 @@ const deleteArticleById = async(_id) => {
     }
 }
 
+const getUsersArticleById  = async(_id) => {
+    try{
+        const article = await Article.findById(_id).populate('category');
+        if(!article) throw new ApiError(httpStatus.NOT_FOUND,'Article not found')
+
+        if(article.status === 'draft'){
+            throw new ApiError(httpStatus.BAD_REQUEST,'Sorry you are not allowed')
+        }
+        return article;
+    }catch(error){
+        throw error;
+    }
+}
+
+
+
 const addCategory = async(body)=>{
     try{
         //// validation
@@ -83,5 +99,6 @@ module.exports = {
     addArticle,
     getArticleById,
     updateArticleById,
-    deleteArticleById
+    deleteArticleById,
+    getUsersArticleById
 }
