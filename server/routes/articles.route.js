@@ -9,6 +9,7 @@ router.post('/',auth('createAny','articles'),addArticleValidator, articlesContro
 
 router.route('/article/:id')
 .get(auth('readAny','articles'),articlesController.getArticleById)
+.patch(auth('updateAny','articles'), articlesController.updateArticleById)
 
 
 
