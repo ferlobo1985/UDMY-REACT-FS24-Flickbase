@@ -55,7 +55,7 @@ const Auth = () =>{
     return(
         <>
             <div className='auth_container'>
-                <h1>Autheticate</h1>
+                <h1>Authenticate</h1>
                 { users.loading ?
                     <Loader/>
                 :
