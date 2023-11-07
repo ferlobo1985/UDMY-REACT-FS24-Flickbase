@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { errorGlobal, successGlobal } from '../reducers/notifications'
+import { errorGlobal, successGlobal } from '../reducers/notifications';
+import { getAuthHeader } from '../../utils/tools'
 
 import axios from 'axios';
 
@@ -38,6 +39,19 @@ export const signInUser = createAsyncThunk(
         }catch(error){
             dispatch(errorGlobal(error.response.data.message))
             throw error;
+        }
+    }
+)
+
+
+export const isAuth = createAsyncThunk(
+    'users/isAuth',
+    async()=>{
+        try{
+            const request = await axios.get('/api/auth/isauth',getAuthHeader())
+            return { data: request.data, auth: true}
+        }catch(error){
+            return { data: {}, auth: false}
         }
     }
 )

@@ -6,6 +6,10 @@ import Header from './components/navigation/header';
 import Auth from './components/auth';
 
 const Router = () => {
+
+
+
+  
   return(
     <BrowserRouter>
       <Header/>
