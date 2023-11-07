@@ -8,7 +8,7 @@ import Box from '@mui/material/Box'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 
-import { Loader } from '../../utils/tools'
+import { Loader, errorHelper } from '../../utils/tools'
 
 
 const Auth = () =>{
@@ -20,7 +20,7 @@ const Auth = () =>{
     const dispatch = useDispatch();
 
     const formik =  useFormik({
-        initialValues:{email:'francis@gmail.com',password:'testing123'},
+        initialValues:{email:'',password:''},
         validationSchema:Yup.object({
             email:Yup.string()
             .required('Sorry the email is required')
@@ -55,8 +55,39 @@ const Auth = () =>{
                         component="form"
                         onSubmit={formik.handleSubmit}
                     >
-                            form
+                            
+                        <TextField
+                            name="email"
+                            label="Enter you email"
+                            variant='outlined'
+                            {...formik.getFieldProps('email')}
+                            {...errorHelper(formik,'email')}
+                        />
 
+
+                        <TextField
+                            name="password"
+                            label="Enter you password"
+                            variant='outlined'
+                            type="password"
+                            {...formik.getFieldProps('password')}
+                            {...errorHelper(formik,'password')}
+                        />
+
+                        <div className='mt-2'>
+                            <Button variant='contained' color="primary" type="submit" size="large">
+                                {register ? 'Register':'Login'}
+                            </Button>
+                            <Button
+                                className='mt-3'
+                                variant='outlined' 
+                                color="secondary" 
+                                size="small"
+                                onClick={()=> setRegister(!register)}
+                            >
+                                Want to { !register ? 'Register':'Login'}
+                            </Button>
+                        </div>
                     </Box>
                 }
             </div> 
