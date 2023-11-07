@@ -17,7 +17,7 @@ import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 
-const SideDrawer = () => {
+const SideDrawer = ({users}) => {
     const [state,setState] = useState(false);
 
     return(
@@ -51,7 +51,8 @@ const SideDrawer = () => {
                             <ListItemText primary="Contact"/>
                         </ListItemButton>
 
-
+                        
+                        { !users.auth ?
                         <ListItemButton
                             component={RouterLink}
                             to="/auth"
@@ -62,8 +63,7 @@ const SideDrawer = () => {
                             </ListItemIcon>
                             <ListItemText primary="Sign in"/>
                         </ListItemButton>
-
-
+                        :
                         <ListItemButton
                            onClick={()=>{
                                 alert('sign out')
@@ -74,9 +74,11 @@ const SideDrawer = () => {
                             </ListItemIcon>
                             <ListItemText primary="Sign out"/>
                         </ListItemButton>
+                        }
 
                         <>
                             <Divider/>
+                            { users.auth ?
                             <ListItemButton
                                 component={RouterLink}
                                 to="/dashboard"
@@ -87,6 +89,7 @@ const SideDrawer = () => {
                                 </ListItemIcon>
                                 <ListItemText primary="Dashboard"/>
                             </ListItemButton>
+                            :null}
                         </>
 
                     </List>

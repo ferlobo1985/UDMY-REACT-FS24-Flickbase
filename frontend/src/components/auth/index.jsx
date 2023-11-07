@@ -9,7 +9,8 @@ import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button';
 
 import { Loader, errorHelper } from '../../utils/tools';
-import { registerUser, signInUser } from '../../store/actions/users'
+import { registerUser, signInUser } from '../../store/actions/users';
+import PreventSingIn from '../../hoc/preventSignin';
 
 
 const Auth = () =>{
@@ -42,18 +43,14 @@ const Auth = () =>{
         }
     }
 
-
     useEffect(()=>{
         if(notifications && notifications.global.success){
             navigate('/dashboard')
         }
     },[notifications])
 
-
-
-
     return(
-        <>
+        <PreventSingIn users={users}>
             <div className='auth_container'>
                 <h1>Authenticate</h1>
                 { users.loading ?
@@ -102,7 +99,7 @@ const Auth = () =>{
                     </Box>
                 }
             </div> 
-        </>
+        </PreventSingIn>
     )
 }
 
