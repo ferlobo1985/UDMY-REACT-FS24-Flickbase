@@ -6,6 +6,8 @@ import { AdminTitle, errorHelper, Loader } from '../../../../utils/tools'
 import { useFormik, FieldArray, FormikProvider } from 'formik';
 import { formValues, validation } from './validationSchema';
 
+import WYSIWYG from '../../../../utils/form/tiptap'
+
 // redux
 import { getCategories } from '../../../../store/actions/articles'
 import { useSelector, useDispatch } from 'react-redux';
@@ -41,6 +43,11 @@ const AddArticle = () => {
         }   
     })
 
+
+    const handleEditorState = (state) => {
+        formik.setFieldValue('content',state,true)
+    }
+
     useEffect(()=>{
         dispatch(getCategories({}));
     },[])
@@ -63,7 +70,9 @@ const AddArticle = () => {
                 </div>
 
                 <div className='form-group'>
-                    WYSIWYG
+                    <WYSIWYG
+                        setEditorState={(state)=>handleEditorState(state)}
+                    />
                 </div>
 
                 <div className='form-group'>
