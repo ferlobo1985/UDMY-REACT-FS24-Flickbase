@@ -13,6 +13,7 @@ import { setLayout } from '../../store/reducers/site'
 const Header = () => {
     const users = useSelector(state=>state.users); 
     const notifications = useSelector(state=>state.notifications);
+    const site = useSelector(state => state.site);
     const dispatch = useDispatch();
     let navigate = useNavigate();
     let location = useLocation()
@@ -52,7 +53,7 @@ const Header = () => {
 
     return(
         <>
-            <nav className='navbar fixed-top'>
+            <nav className={`navbar fixed-top ${site.layout}`}>
                 <Link to="/" className='navbar-brand d-flex align-items-center fredoka_ff'>
                     Flickbase
                 </Link>
