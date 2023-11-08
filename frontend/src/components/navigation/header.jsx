@@ -6,6 +6,7 @@ import { clearNotifications } from '../../store/reducers/notifications';
 import { signOut } from '../../store/actions/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { showToast } from '../../utils/tools'
+import { setLayout } from '../../store/reducers/site'
 
 
 
@@ -14,6 +15,19 @@ const Header = () => {
     const notifications = useSelector(state=>state.notifications);
     const dispatch = useDispatch();
     let navigate = useNavigate();
+    let location = useLocation()
+
+
+    useEffect(()=>{
+        // http://localhost:3000/dashboard/articles
+        let pathname = location.pathname.split('/');
+        if(pathname[1] === 'dashboard'){
+            dispatch(setLayout('dash_layout'))
+        } else {
+            dispatch(setLayout(''))
+        }
+    },[location.pathname, dispatch])
+
 
     useEffect(()=>{
         let { global } = notifications;
