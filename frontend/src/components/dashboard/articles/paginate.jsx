@@ -5,7 +5,8 @@ const PaginateComponent = ({
     articles,
     goToEdit,
     goToPrevPage,
-    goToNextPage
+    goToNextPage,
+    handleStatusChange
 }) =>{
 
 
@@ -38,7 +39,7 @@ const PaginateComponent = ({
                             Edit
                         </td>
                         <td className='action_btn status_btn'
-                            onClick={()=> alert('change status')}
+                            onClick={()=> handleStatusChange(item.status,item._id) }
                         >
                             {item.status}
                         </td>
@@ -63,12 +64,12 @@ const PaginateComponent = ({
                 { articles.hasNextPage ?
                 <>
                     <Pagination.Item
-                        onClick={()=>goToPrevPage(articles.nextPage)}
+                        onClick={()=>goToNextPage(articles.nextPage)}
                     >
                         {articles.nextPage}
                     </Pagination.Item>
                     <Pagination.Next
-                         onClick={()=>goToPrevPage(articles.nextPage)}
+                         onClick={()=>goToNextPage(articles.nextPage)}
                     />
                 </>
                 :null}

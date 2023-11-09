@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
     getCategories,
     addArticle,
-    getPaginateArticles
+    getPaginateArticles,
+    changeStatusArticle
 } from '../actions/articles'
 
 export const articlesSlice = createSlice({
@@ -38,6 +39,10 @@ export const articlesSlice = createSlice({
             state.adminArticles = action.payload
         })
         .addCase(getPaginateArticles.rejected,(state,action)=>{ state.loading = false;})
+        /// CHANGE STATUS ARTICLE
+        .addCase(changeStatusArticle.fulfilled,(state,action)=>{
+            state.adminArticles.docs = action.payload;
+        })
         /// GET CATEGORY
         .addCase(getCategories.fulfilled,(state,action)=>{
             state.categories = action.payload;
