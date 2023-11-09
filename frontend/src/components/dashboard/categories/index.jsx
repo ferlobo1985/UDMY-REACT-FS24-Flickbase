@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AdminTitle  } from '../../../utils/tools';
 import { Table, Row, Col } from 'react-bootstrap'
 
-import { getCategories } from '../../../store/actions/articles'
+import { getCategories } from '../../../store/actions/articles';
+import AddCategory from './addCategory';
 
 const AdminCategories = () => {
     const articles = useSelector(state=>state.articles);
@@ -38,7 +39,7 @@ const AdminCategories = () => {
                     </Table>
                 </Col>
                 <Col>
-                    input
+                    <AddCategory/>
                 </Col>
 
             </Row>
