@@ -21,11 +21,11 @@ export const validation = () => (
         .min(50,'That is it ? ...write some more'),
         excerpt:Yup.string()
         .required('Sorry the title is required')
-        .min(500,'Sorry 500 max'),
+        .max(500,'Sorry 500 max'),
         score:Yup.number()
         .required('Sorry the score is required')
         .min(0,'0 is the min')
-        .min(100,'100 is the max'),
+        .max(100,'100 is the max'),
         director:Yup.string()
         .required('Sorry the director is required'),
         actors:Yup.array()
