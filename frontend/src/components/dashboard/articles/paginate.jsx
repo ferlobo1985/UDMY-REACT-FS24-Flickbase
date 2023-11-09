@@ -1,9 +1,11 @@
-import { Table, Pagination} from 'react-bootstrap';
+import { Table, Pagination } from 'react-bootstrap';
 import { Loader } from '../../../utils/tools';
 
 const PaginateComponent = ({
     articles,
-    goToEdit
+    goToEdit,
+    goToPrevPage,
+    goToNextPage
 }) =>{
 
 
@@ -44,6 +46,33 @@ const PaginateComponent = ({
                     ))}
                 </tbody>
             </Table>
+            <Pagination>
+                { articles.hasPrevPage ?
+                <>
+                    <Pagination.Prev
+                        onClick={()=>goToPrevPage(articles.prevPage)}
+                    />
+                    <Pagination.Item
+                        onClick={()=>goToPrevPage(articles.prevPage)}
+                    >
+                        {articles.prevPage}
+                    </Pagination.Item>
+                </>
+                :null}
+                <Pagination.Item active>{articles.page}</Pagination.Item>
+                { articles.hasNextPage ?
+                <>
+                    <Pagination.Item
+                        onClick={()=>goToPrevPage(articles.nextPage)}
+                    >
+                        {articles.nextPage}
+                    </Pagination.Item>
+                    <Pagination.Next
+                         onClick={()=>goToPrevPage(articles.nextPage)}
+                    />
+                </>
+                :null}
+            </Pagination>
             </>
         :
             <Loader/>
