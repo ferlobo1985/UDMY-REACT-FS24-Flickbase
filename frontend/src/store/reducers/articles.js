@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
     getCategories,
-    addArticle
+    addArticle,
+    getPaginateArticles
 } from '../actions/articles'
 
 export const articlesSlice = createSlice({
@@ -30,6 +31,13 @@ export const articlesSlice = createSlice({
             state.lastAdded = action.payload
         })
         .addCase(addArticle.rejected,(state,action)=>{ state.loading = false;})
+        // GET PAGINATE ARTICLES
+        .addCase(getPaginateArticles.pending,(state)=>{ state.loading = true; })
+        .addCase(getPaginateArticles.fulfilled,(state,action)=>{
+            state.loading = false;
+            state.adminArticles = action.payload
+        })
+        .addCase(getPaginateArticles.rejected,(state,action)=>{ state.loading = false;})
         /// GET CATEGORY
         .addCase(getCategories.fulfilled,(state,action)=>{
             state.categories = action.payload;
