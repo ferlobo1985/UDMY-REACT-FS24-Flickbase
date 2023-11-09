@@ -22,6 +22,22 @@ export const addArticle = createAsyncThunk(
 )
 
 
+export const getAdminArticle = createAsyncThunk(
+    'articles/getAdminArticle',
+    async(_id,{dispatch})=>{
+        try{
+            const request = await axios.get(`/api/articles/article/${_id}`,getAuthHeader());  
+            return request.data;
+        }catch(error){
+            dispatch(errorGlobal(error.response.data.message))
+            throw error;
+        }
+    }
+)
+
+
+
+
 export const getCategories = createAsyncThunk(
     'articles/getCategories',
     async(obj,{dispatch})=>{
