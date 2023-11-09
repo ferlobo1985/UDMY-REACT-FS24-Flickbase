@@ -1,6 +1,7 @@
 import { EditorContent, useEditor, BubbleMenu, FloatingMenu}  from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import '../../styles/tiptap.scss';
+import { useEffect } from 'react';
 
 // import { generateHTML } from '@tiptap/html'
 
@@ -26,6 +27,11 @@ const Tiptap = ({setEditorState,editorContent=''}) => {
         }
     })
 
+    // useEffect(()=>{
+    //   if(editor){
+    //     console.log(editor.commands)
+    //   }
+    // },[editor])
 
     return(
         <>

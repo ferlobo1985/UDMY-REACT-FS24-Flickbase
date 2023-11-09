@@ -33,7 +33,9 @@ const EditArticle = () => {
     const dispatch =  useDispatch();
     const actorsValue = useRef()
 
-    const [formData,setFormdata] = useState(formValues) 
+    const [loading,setLoading] = useState(true)
+    const [formData,setFormdata] = useState(formValues);
+    const [editorContent,setEditorContent] = useState(null);
     let navigate =  useNavigate();
     let {articleId} = useParams();
 
@@ -66,6 +68,8 @@ const EditArticle = () => {
             }
             
             setFormdata(response)
+            setEditorContent(response.content)
+            setLoading(false);
         })
     },[dispatch])
 
@@ -73,6 +77,9 @@ const EditArticle = () => {
     return(
         <>
             <AdminTitle title="Edit article"/>
+            { loading ?
+                <Loader/>
+            :
             <form className='mt-3 article_form' onSubmit={formik.handleSubmit}>
 
                 <div className='form-group'>
@@ -86,11 +93,14 @@ const EditArticle = () => {
                     />
                 </div>
 
-                <div className='form-group'>
-                    <WYSIWYG
-                        setEditorState={(state)=>handleEditorState(state)}
-                    />
-                </div>
+                { editorContent ? 
+                    <div className='form-group'>
+                        <WYSIWYG
+                            editorContent={editorContent}
+                            setEditorState={(state)=>handleEditorState(state)}
+                        />
+                    </div>
+                :null}
 
                 <div className='form-group'>
                     <TextField
@@ -236,6 +246,7 @@ const EditArticle = () => {
                     </Button>
                 }
             </form>
+            }
         </>
     )
 }
