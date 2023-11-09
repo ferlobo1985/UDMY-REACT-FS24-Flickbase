@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { AdminTitle } from '../../../utils/tools'
 
 import PaginateComponent from './paginate';
-import { getPaginateArticles, changeStatusArticle } from '../../../store/actions/articles';
+import { getPaginateArticles, changeStatusArticle, removeArticle } from '../../../store/actions/articles';
 
 import {
     Modal,
@@ -23,13 +23,13 @@ const AdminArticles = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
-    const [removeAlert,serRemoveAlert] = useState(false);
+    const [removeAlert,setRemoveAlert] = useState(false);
     const [toRemove,setRemove] = useState(null)
 
-    const handleClose = () =>  serRemoveAlert(false);
+    const handleClose = () =>  setRemoveAlert(false);
     const handleShow = (id=null) => {
         setRemove(id);
-        serRemoveAlert(true)
+        setRemoveAlert(true)
     }
 
 
@@ -54,7 +54,12 @@ const AdminArticles = () => {
  
 
     const handleDelete = () => {
-       //// dispatch
+      dispatch(removeArticle(toRemove))
+      .unwrap()
+      .finally(()=>{
+        setRemoveAlert(false);
+        setRemove(null)
+      })
     }
 
 
