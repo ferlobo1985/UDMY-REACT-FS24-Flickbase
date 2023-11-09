@@ -16,6 +16,7 @@ import DashboardMain from './components/dashboard/main';
 import AdminArticles from './components/dashboard/articles'
 import AddArticle from './components/dashboard/articles/edit_add/add';
 import EditArticle from './components/dashboard/articles/edit_add/edit';
+import AdminCategories from './components/dashboard/categories';
 
 
 const Router = () => {
@@ -53,6 +54,7 @@ const Router = () => {
                 <Route path="articles" element={<AdminArticles/>}/>
                 <Route path="articles/add" element={<AddArticle/>}/>
                 <Route path="articles/edit/:articleId" element={<EditArticle/>}/>
+                <Route path="categories" element={<AdminCategories/>}/>
               </Route>
               <Route path='/auth' element={<Auth/>}/>
               <Route path='/' element={<Home/>}/>
