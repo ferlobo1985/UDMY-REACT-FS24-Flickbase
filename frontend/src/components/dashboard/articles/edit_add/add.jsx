@@ -9,7 +9,7 @@ import { formValues, validation } from './validationSchema';
 import WYSIWYG from '../../../../utils/form/tiptap'
 
 // redux
-import { getCategories } from '../../../../store/actions/articles'
+import { getCategories, addArticle } from '../../../../store/actions/articles'
 import { useSelector, useDispatch } from 'react-redux';
 
 //MUI
@@ -39,7 +39,11 @@ const AddArticle = () => {
         initialValues:formValues,
         validationSchema: validation,
         onSubmit:(values)=>{
-            console.log(values)
+           dispatch(addArticle(values))
+           .unwrap()
+           .then(()=>{
+                navigate('/dashboard/articles')
+           })
         }   
     })
 
