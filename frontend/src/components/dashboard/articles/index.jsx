@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom' 
 import { useSelector, useDispatch } from 'react-redux'
 import { AdminTitle } from '../../../utils/tools'
@@ -23,6 +23,15 @@ const AdminArticles = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
 
+    const [removeAlert,serRemoveAlert] = useState(false);
+    const [toRemove,setRemove] = useState(null)
+
+    const handleClose = () =>  serRemoveAlert(false);
+    const handleShow = (id=null) => {
+        setRemove(id);
+        serRemoveAlert(true)
+    }
+
 
     //// PAGINATE FUNC
 
@@ -43,6 +52,11 @@ const AdminArticles = () => {
         dispatch(changeStatusArticle({newStatus,_id}))
     }
  
+
+    const handleDelete = () => {
+       //// dispatch
+    }
+
 
     ///////////
 
@@ -82,10 +96,27 @@ const AdminArticles = () => {
                         goToPrevPage={(page)=>goToPrevPage(page)}
                         goToNextPage={(page)=>goToNextPage(page)}
                         handleStatusChange={(status,id)=>handleStatusChange(status,id)}
+                        handleShow={(id)=>handleShow(id)}
                     />
                 
                 </>
 
+                <Modal show={removeAlert} onHide={handleClose}> 
+                    <Modal.Header closeButton>
+                        <Modal.Title>Are you really sure ?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        There is no going back.
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant='secondary' onClick={handleClose}>
+                            Oop, close this.
+                        </Button>
+                        <Button variant='danger' onClick={()=>handleDelete()}>
+                            Delete
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </>
     )
