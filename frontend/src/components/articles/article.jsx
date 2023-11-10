@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Loader } from '../../utils/tools';
+import ScoreCard from "../../utils/scoreCard";
 
-import { getArticle } from '../../store/actions/articles'
+import { getArticle } from '../../store/actions/articles';
+
 
 const Article = () => {
     const articles = useSelector(state=>state.articles);
@@ -33,7 +35,7 @@ const Article = () => {
                         }>
                         </div>
                     </div>
-                    SCORECARD
+                    <ScoreCard current={articles.current}/>
                 </div>
             :
                 <Loader/>
