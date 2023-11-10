@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import { useDispatch } from 'react-redux';
 import { errorHelper, Loader } from '../../../../utils/tools'
 
+import { changeEmail } from '../../../../store/actions/users';
+
 import {
     TextField,
     Button,
@@ -36,7 +38,11 @@ const EmailStepper = ({user,closeModal}) => {
             })
         }),
         onSubmit:(values)=>{
-           console.log(values) 
+          dispatch(changeEmail(values))
+          .unwrap()
+          .then(()=>{
+            closeModal();
+          })
         }
     })
 
