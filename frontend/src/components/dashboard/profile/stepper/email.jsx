@@ -21,6 +21,20 @@ const EmailStepper = ({user,closeModal}) => {
     const formik = useFormik({
         enableReinitialize:true,
         initialValues:{email:'', newemail:''},
+        validationSchema:Yup.object({
+            email:Yup.string()
+            .required('This is required')
+            .email('This is not a valid email')
+            .test('match','Please check your email',(email)=>{
+                return email === user.data.email
+            }),
+            newemail:Yup.string()
+            .required('This is required')
+            .email('This is not a valid email')
+            .test('match','The email is the same',(newemail)=>{
+                return newemail !== user.data.email
+            })
+        }),
         onSubmit:(values)=>{
            console.log(values) 
         }
@@ -35,17 +49,17 @@ const EmailStepper = ({user,closeModal}) => {
         setActiveStep((prevActiveStep)=>prevActiveStep - 1)
     }
 
-    const nextBtn = () => {
+    const nextBtn = () => (
         <Button className='mt-3' variant='contained' color='primary' onClick={handleNext}>
             Next
         </Button>
-    }
+    )
 
-    const backBtn = () => {
-        <Button className='mt-3' variant='contained' color='primary' onClick={handleBack}>
+    const backBtn = () => (
+        <Button className='mt-3 me-2' variant='contained' color='primary' onClick={handleBack}>
             Back
         </Button>
-    }
+    )
     
 
     return(
@@ -65,13 +79,48 @@ const EmailStepper = ({user,closeModal}) => {
                 </Stepper>
                 <form className='mt-3 stepper_form' onSubmit={formik.handleSubmit}>
                     { activeStep === 0 ?
-                        <></>
+                        <div className='form-group'>
+                            <TextField
+                                style={{width:'100%'}}
+                                name='email'
+                                label="Enter your old email"
+                                variant='outlined'
+                                {...formik.getFieldProps('email')}
+                                {...errorHelper(formik,'email')}
+                            />
+                            { formik.values.email && !formik.errors.email ?
+                                nextBtn()
+                            :null}
+                        </div>
                     :null}
                     { activeStep === 1 ?
-                        <></>
+                       <div className='form-group'>
+                       <TextField
+                           style={{width:'100%'}}
+                           name='newemail'
+                           label="Enter your new email"
+                           variant='outlined'
+                           {...formik.getFieldProps('newemail')}
+                           {...errorHelper(formik,'newemail')}
+                       />
+                       { backBtn() }
+                       { formik.values.newemail && !formik.errors.newemail ?
+                           nextBtn()
+                       :null}
+                   </div>
                     :null}
                     { activeStep === 2 ?
-                        <></>
+                        <div className='form-group'>
+                            <Button
+                                className='mt-3 me-2' 
+                                variant='contained' 
+                                color="primary"
+                                onClick={formik.submitForm}
+                            >
+                                Yes change my email
+                            </Button>
+                            { backBtn() }
+                        </div>
                     :null}
                 </form>
 
