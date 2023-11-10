@@ -10,6 +10,7 @@ import MainLayout from './hoc/mainLayout';
 import Home from './components/home';
 import Header from './components/navigation/header';
 import Auth from './components/auth';
+import Article from './components/articles/article';
 
 import Dashboard from './components/dashboard';
 import DashboardMain from './components/dashboard/main';
@@ -17,6 +18,7 @@ import AdminArticles from './components/dashboard/articles'
 import AddArticle from './components/dashboard/articles/edit_add/add';
 import EditArticle from './components/dashboard/articles/edit_add/edit';
 import AdminCategories from './components/dashboard/categories';
+
 
 
 const Router = () => {
@@ -57,6 +59,7 @@ const Router = () => {
                 <Route path="categories" element={<AdminCategories/>}/>
               </Route>
               <Route path='/auth' element={<Auth/>}/>
+              <Route path='/articles/article/:id' element={<Article/>}/>
               <Route path='/' element={<Home/>}/>
             </Routes>
         </MainLayout>

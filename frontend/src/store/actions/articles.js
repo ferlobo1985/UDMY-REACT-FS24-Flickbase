@@ -165,3 +165,17 @@ export const homeLoadMore =  createAsyncThunk(
         }
     }
 )
+
+
+export const getArticle  =  createAsyncThunk(
+    'articles/getArticle',
+    async(id,{dispatch})=>{
+        try{
+          const request = await axios.get(`/api/articles/users/article/${id}`);
+          return request.data
+        }catch(error){
+            dispatch(errorGlobal(error.response.data.message))
+            throw error;
+        }
+    }
+)
